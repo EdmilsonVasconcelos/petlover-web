@@ -74,19 +74,24 @@ const Form = () => {
         }),
       });
 
+      if (createdResponse.status === 400) {
+        const { message } = await createdResponse.json();
+        onSubmitProps.setErrors({ email: message });
+        return;
+      }
+
       if (!createdResponse.ok) {
         throw new Error("Erro na requisição");
       }
 
-      const createdData = await createdResponse.json();
-
-      console.log(createdData);
+      onSubmitProps.resetForm();
     } catch (error) {
-      console.error("Erro ao criar o usuário:", error);
-      // Trate o erro aqui
+      if (error instanceof Error) {
+        console.log("Erro ao criar o usuário: ", error);
+      } else {
+        console.log("Erro ao criar o usuário aauhayga:", error);
+      }
     }
-
-    onSubmitProps.resetForm();
   };
 
   return (
