@@ -86,11 +86,7 @@ const Form = () => {
 
       onSubmitProps.resetForm();
     } catch (error) {
-      if (error instanceof Error) {
-        console.log("Erro ao criar o usuário: ", error);
-      } else {
-        console.log("Erro ao criar o usuário aauhayga:", error);
-      }
+      console.log("Erro ao criar o usuário: ", error);
     }
   };
 
