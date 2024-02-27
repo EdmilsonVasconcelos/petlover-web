@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
-import { BASE_API } from "../utils/api";
+import { BASE_API } from "../../utils/api";
 
 interface FormValues {
   name: string;

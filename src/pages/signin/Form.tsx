@@ -6,10 +6,16 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
-import { BASE_API } from "../utils/api";
+import { BASE_API } from "../../utils/api";
+import { jwtDecode } from "jwt-decode";
+import { useLoggedUser } from "../../hooks/useLoggedUser";
+
+interface FormProps {
+  updateToken: (token: string) => void;
+}
 
 interface FormValues {
   email: string;
@@ -33,9 +39,11 @@ const schema = yup.object().shape({
     .max(100, "O campo deve ter no máximo 20 caracteres"),
 });
 
-const Form = () => {
+const Form = ({ updateToken }: FormProps) => {
   const { palette }: any = useTheme();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const { setLoggedUser } = useLoggedUser();
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (
     values: FormValues,
@@ -58,7 +66,10 @@ const Form = () => {
         throw new Error("Erro na requisição");
       }
 
-      onSubmitProps.resetForm();
+      const { access_token } = await loginResponse.json();
+      updateToken(`Bearer ${access_token}`);
+      setLoggedUser(jwtDecode(access_token));
+      navigate("/list-pets");
     } catch (error) {
       console.log("Erro ao autenticar", error);
     }

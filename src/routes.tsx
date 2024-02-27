@@ -3,9 +3,10 @@ import {
   Route,
   Routes as RoutesApp,
 } from "react-router-dom";
-import Signin from "./signin";
-import Signup from "./signup";
-import ListPets from "./dashboard/list-pets";
+import Signin from "./pages/signin";
+import Signup from "./pages/signup";
+import ListPets from "./pages/list-pets";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function Routes() {
   return (
@@ -13,7 +14,10 @@ export default function Routes() {
       <RoutesApp>
         <Route path="/" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/list-pets" element={<ListPets />} />
+        <Route
+          path="/list-pets"
+          element={<ProtectedRoute element={<ListPets />} />}
+        />
       </RoutesApp>
     </Router>
   );

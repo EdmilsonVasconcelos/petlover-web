@@ -1,9 +1,11 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
+import useToken from "../../hooks/useToken";
 
 export default function Signin() {
   const theme: any = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const { updateToken } = useToken();
 
   return (
     <Box>
@@ -28,7 +30,7 @@ export default function Signin() {
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Bem vindo ao PetLover, aqui somos loucos por pets! =)
         </Typography>
-        <Form />
+        <Form updateToken={updateToken!} />
       </Box>
     </Box>
   );
