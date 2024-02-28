@@ -10,8 +10,7 @@ interface LoggedUserContextType {
   setLoggedUser: (user: User) => void;
 }
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
+interface SelectedPetContextType {
+  selectedPet: Pet;
+  setSelectedPet: (pet: Pet) => void;
 }

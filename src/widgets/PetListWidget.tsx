@@ -1,25 +1,18 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import Friend from "../components/Pet";
+import { Box } from "@mui/material";
 import WidgetWrapper from "../components/WidgetWrapper";
+import Pet from "../components/Pet";
 
 interface PetListProps {
   pets: Pet[];
+  redirectToFeedPage: (pet: Pet) => void;
 }
 
-const PetListWidget = ({ pets }: PetListProps) => {
+const PetListWidget = ({ pets, redirectToFeedPage }: PetListProps) => {
   return (
     <WidgetWrapper>
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {pets?.map((pet) => (
-          <Friend
-            key={pet.id}
-            petId={1}
-            name={pet.name}
-            type={pet.type}
-            petPicturePath={
-              "https://cdn-icons-png.flaticon.com/512/2919/2919906.png"
-            }
-          />
+          <Pet pet={pet} key={pet.id} redirectToFeedPage={redirectToFeedPage} />
         ))}
       </Box>
     </WidgetWrapper>

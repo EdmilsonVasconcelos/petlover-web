@@ -3,9 +3,14 @@ import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
 import { BASE_API, TOKEN } from "../../utils/api";
 import PetListWidget from "../../widgets/PetListWidget";
+import { useSelectedPet } from "../../hooks/useSelectedPet";
+import { useNavigate } from "react-router-dom";
 
 const ListPets = () => {
   const theme: any = useTheme();
+  const { setSelectedPet } = useSelectedPet();
+  const navigate = useNavigate();
+
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const [pets, setPets] = useState<Pet[]>([] as Pet[]);
 
@@ -26,6 +31,11 @@ const ListPets = () => {
 
     getPets();
   }, []);
+
+  const redirectToFeedPage = (pet: Pet) => {
+    setSelectedPet(pet);
+    navigate(`/feed`);
+  };
 
   return (
     <Box>
@@ -50,7 +60,7 @@ const ListPets = () => {
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Meus Pets
         </Typography>
-        <PetListWidget pets={pets} />
+        <PetListWidget pets={pets} redirectToFeedPage={redirectToFeedPage} />
       </Box>
     </Box>
   );

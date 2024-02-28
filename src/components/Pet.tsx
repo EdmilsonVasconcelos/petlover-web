@@ -1,20 +1,15 @@
 import { ArrowCircleRight } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import UserImage from "./UserImage";
+import UserImage from "./PetImage";
 import { capitalizeFirstLetter } from "../utils/api";
 
 type PetProps = {
-  petId: number;
-  name: string;
-  type: string;
-  petPicturePath: string;
+  pet: Pet;
+  redirectToFeedPage: (pet: Pet) => void;
 };
 
-const Pet = ({ petId, name, type, petPicturePath }: PetProps) => {
-  const navigate = useNavigate();
-
+const Pet = ({ pet, redirectToFeedPage }: PetProps) => {
   const { palette }: any = useTheme();
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
@@ -28,11 +23,7 @@ const Pet = ({ petId, name, type, petPicturePath }: PetProps) => {
           image={"https://cdn-icons-png.flaticon.com/512/2919/2919906.png"}
           size="55px"
         />
-        <Box
-          onClick={() => {
-            console.log("oioioii");
-          }}
-        >
+        <Box onClick={() => redirectToFeedPage(pet)}>
           <Typography
             color={main}
             variant="h5"
@@ -44,17 +35,15 @@ const Pet = ({ petId, name, type, petPicturePath }: PetProps) => {
               },
             }}
           >
-            {capitalizeFirstLetter(name)}
+            {capitalizeFirstLetter(pet.name)}
           </Typography>
           <Typography color={medium} fontSize="0.75rem">
-            {capitalizeFirstLetter(type)}
+            {capitalizeFirstLetter(pet.type)}
           </Typography>
         </Box>
       </FlexBetween>
       <IconButton
-        onClick={() => {
-          console.log("auhauha");
-        }}
+        onClick={() => redirectToFeedPage(pet)}
         sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
       >
         <ArrowCircleRight sx={{ color: primaryDark }} />

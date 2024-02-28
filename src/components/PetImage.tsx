@@ -1,6 +1,11 @@
 import { Box } from "@mui/material";
 
-const UserImage = ({ image, size = "60px" }) => {
+type PetImageProps = {
+  image: string;
+  size?: string;
+};
+
+const PetImage = ({ image, size = "60px" }: PetImageProps) => {
   return (
     <Box width={size} height={size}>
       <img
@@ -14,4 +19,4 @@ const UserImage = ({ image, size = "60px" }) => {
   );
 };
 
-export default UserImage;
+export default PetImage;

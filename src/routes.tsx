@@ -7,6 +7,7 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import ListPets from "./pages/list-pets";
 import ProtectedRoute from "./ProtectedRoute";
+import Feed from "./pages/feed";
 
 export default function Routes() {
   return (
@@ -18,6 +19,7 @@ export default function Routes() {
           path="/list-pets"
           element={<ProtectedRoute element={<ListPets />} />}
         />
+        <Route path="/feed" element={<ProtectedRoute element={<Feed />} />} />
       </RoutesApp>
     </Router>
   );
