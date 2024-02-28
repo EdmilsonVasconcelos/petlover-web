@@ -9,7 +9,6 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
-  TextField,
 } from "@mui/material";
 import {
   Search,
@@ -36,7 +35,7 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const fullName = "Edmilson Vasconcelos";
+  const fullName = "Tobi";
 
   return (
     <FlexBetween padding="1rem 6%" bgcolor={alt}>
@@ -53,7 +52,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          PetLover
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -84,7 +83,6 @@ const Navbar = () => {
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
           <FormControl variant="standard">
-            <TextField value={fullName} />
             <Select
               value={fullName}
               sx={{
@@ -162,7 +160,6 @@ const Navbar = () => {
             <Notifications sx={{ fontSize: "25px" }} />
             <Help sx={{ fontSize: "25px" }} />
             <FormControl variant="standard">
-              <TextField value={fullName} />
               <Select
                 value={fullName}
                 sx={{
