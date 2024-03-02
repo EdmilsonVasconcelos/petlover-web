@@ -1,24 +1,21 @@
 import {
   ManageAccountsOutlined,
-  EditOutlined,
   LocationOnOutlined,
-  WorkOutlineOutlined,
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WidgetWrapper from "../components/WidgetWrapper";
 import FlexBetween from "../components/FlexBetween";
 import PetImage from "../components/PetImage";
+import { useSelectedPet } from "../hooks/useSelectedPet";
+import { capitalizeFirstLetter } from "../utils/utils";
 
 type PetWidgetProps = {
-  petId: number;
-  picturePath: string;
+  pet: Pet;
 };
 
-const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
-  const token = "token";
+const PetWidget = ({ pet }: PetWidgetProps) => {
   const navigate = useNavigate();
 
   const { palette }: any = useTheme();
@@ -26,34 +23,7 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
 
-  const [user, setUser] = useState(null);
-
-  const getPet = async () => {
-    const response = await fetch(`http://localhost:3001/users/1`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    setUser(data);
-  };
-
-  useEffect(() => {
-    getPet();
-  }, []);
-
-  if (!user) {
-    return null;
-  }
-
-  const {
-    firstName,
-    lastName,
-    location,
-    occupation,
-    viewedProfile,
-    impressions,
-    friends,
-  } = user;
+  const { selectedPet } = useSelectedPet();
 
   return (
     <WidgetWrapper>
@@ -61,10 +31,15 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
       <FlexBetween
         gap="0.5rem"
         pb="1.1rem"
-        onClick={() => navigate(`/profile/1`)}
+        onClick={() => navigate(`/my-profile`)}
       >
         <FlexBetween gap="1rem">
-          <PetImage image={picturePath} />
+          <PetImage
+            image={
+              pet?.petPicturePath ||
+              "https://cdn-icons-png.flaticon.com/512/2919/2919906.png"
+            }
+          />
           <Box>
             <Typography
               variant="h4"
@@ -77,9 +52,9 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
                 },
               }}
             >
-              {firstName} {lastName}
+              {capitalizeFirstLetter(pet.name)}
             </Typography>
-            <Typography color={medium}>{1} friends</Typography>
+            <Typography color={medium}>{1} amigo</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />
@@ -91,12 +66,12 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
       <Box p="1rem 0">
         <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
           <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{location}</Typography>
+          <Typography color={medium}>{"Brasil"}</Typography>
         </Box>
-        <Box display="flex" alignItems="center" gap="1rem">
+        {/* <Box display="flex" alignItems="center" gap="1rem">
           <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{occupation}</Typography>
-        </Box>
+          <Typography color={medium}>{"location here"}</Typography>
+        </Box> */}
       </Box>
 
       <Divider />
@@ -104,23 +79,23 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
       {/* THIRD ROW */}
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
-          <Typography color={medium}>Who's viewed your profile</Typography>
+          <Typography color={medium}>Quem viu meu perfil?</Typography>
           <Typography color={main} fontWeight="500">
-            {viewedProfile}
+            {"10 pessoas"}
           </Typography>
         </FlexBetween>
-        <FlexBetween>
+        {/* <FlexBetween>
           <Typography color={medium}>Impressions of your post</Typography>
           <Typography color={main} fontWeight="500">
-            {impressions}
+            {"impressions"}
           </Typography>
-        </FlexBetween>
+        </FlexBetween> */}
       </Box>
 
       <Divider />
 
       {/* FOURTH ROW */}
-      <Box p="1rem 0">
+      {/* <Box p="1rem 0">
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
           Social Profiles
         </Typography>
@@ -150,7 +125,7 @@ const PetWidget = ({ petId, picturePath }: PetWidgetProps) => {
           </FlexBetween>
           <EditOutlined sx={{ color: main }} />
         </FlexBetween>
-      </Box>
+      </Box> */}
     </WidgetWrapper>
   );
 };

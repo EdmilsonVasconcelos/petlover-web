@@ -138,7 +138,7 @@ const Form = ({ updateToken }: FormProps) => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              Criar conta
+              Entrar
             </Button>
             {
               <Typography

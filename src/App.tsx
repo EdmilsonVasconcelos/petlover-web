@@ -9,7 +9,7 @@ import LoggedUserContext from "./hooks/contexts/loggedUser";
 import SelectedPetContext from "./hooks/contexts/selectedPet";
 
 function App() {
-  const mode = "light";
+  const mode = "dark";
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const [token, setToken] = useState(sessionStorage.getItem(TOKEN));
   const [loggedUser, setLoggedUser] = useState({} as User);

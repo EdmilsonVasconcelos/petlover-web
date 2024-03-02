@@ -2,6 +2,6 @@ interface Pet {
   id: number;
   name: string;
   type: string;
-  birthdate: string;
+  birthDate: string;
   petPicturePath?: string;
 }

@@ -4,10 +4,10 @@ import WidgetWrapper from "../components/WidgetWrapper";
 import Friend from "../components/Friend";
 
 type FriendListWidgetProps = {
-  petId: string;
+  pet: Pet;
 };
 
-const FriendListWidget = ({ petId }: FriendListWidgetProps) => {
+const FriendListWidget = ({ pet }: FriendListWidgetProps) => {
   const { palette }: any = useTheme();
 
   const [friends, setFriends] = useState([]);
@@ -25,14 +25,14 @@ const FriendListWidget = ({ petId }: FriendListWidgetProps) => {
   }, []);
 
   return (
-    <WidgetWrapper>
+    <WidgetWrapper marginTop={2}>
       <Typography
         color={palette.neutral.dark}
         variant="h5"
         fontWeight="500"
         sx={{ mb: "1.5rem" }}
       >
-        Friend List
+        Lista de amigos
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {friends.map((friend) => (

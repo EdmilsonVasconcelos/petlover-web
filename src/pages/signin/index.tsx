@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
 import useToken from "../../hooks/useToken";
+import { Link } from "react-router-dom";
 
 export default function Signin() {
   const theme: any = useTheme();
@@ -16,7 +17,9 @@ export default function Signin() {
         textAlign="center"
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          PetLover
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            PetLover
+          </Link>
         </Typography>
       </Box>
 
@@ -28,7 +31,7 @@ export default function Signin() {
         bgcolor={theme.palette.background?.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Bem vindo ao PetLover, aqui somos loucos por pets! =)
+          LOGIN
         </Typography>
         <Form updateToken={updateToken!} />
       </Box>

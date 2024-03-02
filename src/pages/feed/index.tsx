@@ -22,12 +22,8 @@ export default function Feed() {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <PetWidget
-            petId={1}
-            picturePath={
-              "https://cdn-icons-png.flaticon.com/512/2919/2919906.png"
-            }
-          />
+          <PetWidget pet={selectedPet} />
+          <FriendListWidget pet={selectedPet} />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
@@ -44,7 +40,6 @@ export default function Feed() {
           <Box flexBasis="26%">
             <AdvertWidget />
             <Box m="2rem 0" />
-            <FriendListWidget petId={"1"} />
           </Box>
         )}
       </Box>

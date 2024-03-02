@@ -2,7 +2,7 @@ import { ArrowCircleRight } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./PetImage";
-import { capitalizeFirstLetter } from "../utils/api";
+import { capitalizeFirstLetter } from "../utils/utils";
 
 type PetProps = {
   pet: Pet;
